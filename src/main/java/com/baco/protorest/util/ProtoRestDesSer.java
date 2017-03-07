@@ -17,22 +17,25 @@ import java.sql.Timestamp;
  */
 public class ProtoRestDesSer {
 
-    public static final void writeProtorest(Object o, Class klass, OutputStream os) throws IOException, WebApplicationException {
-        /**
-         * Prepare schemas
-         */
+    private static Schema schema;
+
+    private static final void configureRuntime() {
         DefaultIdStrategy dis = (DefaultIdStrategy) RuntimeEnv.ID_STRATEGY;
         dis.registerDelegate(TIMESTAMP_DELEGATE);
         dis.registerDelegate(DATE_DELEGATE);
         dis.registerDelegate(TIME_DELEGATE);
-        Schema schema = RuntimeSchema.getSchema(klass);
-        LinkedBuffer buffer = null;
-        int outputLen = 0;
+        schema = RuntimeSchema.getSchema(ProtoEnvelope.class);
+    }
 
+
+    public static final void writeProtorest(Object obj, Class klass, OutputStream os) throws IOException, WebApplicationException {
+        configureRuntime();
+        ProtoEnvelope o = new ProtoEnvelope(obj);
+        LinkedBuffer buffer = null;
         try {
             buffer = BufferPool.takeBuffer();
             buffer.clear();
-            outputLen = ProtostuffIOUtil.writeDelimitedTo(os, o, schema, buffer);
+            ProtostuffIOUtil.writeDelimitedTo(os, o, schema, buffer);
         } catch (InterruptedException ex) {
             throw new InternalServerErrorException("PROTOREST: Cannot obtain a buffer to write object.");
         } finally {
@@ -47,51 +50,34 @@ public class ProtoRestDesSer {
     }
 
     public static final Object readProtorest(Class klass, InputStream is) throws IOException, WebApplicationException {
-        /**
-         * Prepare schemas
-         */
-        DefaultIdStrategy dis = (DefaultIdStrategy) RuntimeEnv.ID_STRATEGY;
-        dis.registerDelegate(TIMESTAMP_DELEGATE);
-        dis.registerDelegate(DATE_DELEGATE);
-        dis.registerDelegate(TIME_DELEGATE);
-        Schema schema = RuntimeSchema.getSchema(klass);
+        configureRuntime();
         /**
          * Obtain decompressed input stream
          */
-        Object result = schema.newMessage();
+        ProtoEnvelope result = (ProtoEnvelope) schema.newMessage();
         ProtostuffIOUtil.mergeDelimitedFrom(is, result, schema);
-        return result;
+        return result.getPayload();
     }
 
     private static final Object getFromProtorest(byte[] protorest, Class klass) throws IOException {
         /**
          * Prepare schemas
          */
-        DefaultIdStrategy dis = (DefaultIdStrategy) RuntimeEnv.ID_STRATEGY;
-        dis.registerDelegate(TIMESTAMP_DELEGATE);
-        dis.registerDelegate(DATE_DELEGATE);
-        dis.registerDelegate(TIME_DELEGATE);
-        Schema schema = RuntimeSchema.getSchema(klass);
-
+        configureRuntime();
         ByteArrayInputStream is = new ByteArrayInputStream(protorest);
-        Object result = schema.newMessage();
+        ProtoEnvelope result = (ProtoEnvelope)schema.newMessage();
         ProtostuffIOUtil.mergeDelimitedFrom(is, result, schema);
         is.close();
-        return result;
+        return result.getPayload();
     }
 
-    private static final byte[] getProtorest(Object o, Class klass) throws IOException {
-        /**
-         * Prepare schemas
-         */
-        DefaultIdStrategy dis = (DefaultIdStrategy) RuntimeEnv.ID_STRATEGY;
-        dis.registerDelegate(TIMESTAMP_DELEGATE);
-        dis.registerDelegate(DATE_DELEGATE);
-        dis.registerDelegate(TIME_DELEGATE);
-        Schema schema = RuntimeSchema.getSchema(klass);
+    private static final byte[] getProtorest(Object obj, Class klass) throws IOException {
+        ProtoEnvelope o = new ProtoEnvelope(obj);
 
         LinkedBuffer buffer = null;
+
         byte[] protorest;
+
         try {
             buffer = BufferPool.takeBuffer();
             buffer.clear();
