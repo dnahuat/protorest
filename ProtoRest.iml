@@ -13,7 +13,6 @@
     <orderEntry type="library" name="Maven: io.protostuff:protostuff-runtime:1.5.3" level="project" />
     <orderEntry type="library" name="Maven: io.protostuff:protostuff-collectionschema:1.5.3" level="project" />
     <orderEntry type="library" name="Maven: io.protostuff:protostuff-core:1.5.3" level="project" />
-    <orderEntry type="library" name="Maven: org.iq80.snappy:snappy:0.4" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax:javaee-api:7.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.sun.mail:javax.mail:1.5.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.activation:activation:1.1" level="project" />

@@ -45,6 +45,11 @@ public class ProtoRestException
     private final String serializableStacktrace;
     private String message;
 
+    public ProtoRestException(final String message) {
+        super(message);
+        serializableStacktrace = "";
+    }
+
     public ProtoRestException(final String message, final Throwable cause) {
         super(message);
         serializableStacktrace = (cause == null) ? "" : stacktraceToString(cause);
