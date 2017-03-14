@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bbd2c785-c840-4d2f-95fb-8345b05b280c" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_iq80_snappy_snappy_0_4.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/baco/protorest/provider/ProtoRestMessageBodyProvider.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProtoRest.iml" afterPath="$PROJECT_DIR$/ProtoRest.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/baco/protorest/exceptions/ProtoRestException.java" afterPath="$PROJECT_DIR$/src/main/java/com/baco/protorest/exceptions/ProtoRestException.java" />
     </list>
     <ignored path="ProtoRest.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,8 +40,8 @@
           <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/pom.xml">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="442">
-                  <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="46" selection-end-column="21" />
+                <state relative-caret-position="-323">
+                  <caret line="5" column="27" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
                   <folding />
                 </state>
               </provider>
@@ -85,8 +81,8 @@
           <file leaf-file-name="ProtoRestException.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/baco/protorest/exceptions/ProtoRestException.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="391">
-                  <caret line="54" column="36" selection-start-line="54" selection-start-column="36" selection-end-line="54" selection-end-column="36" />
+                <state relative-caret-position="136">
+                  <caret line="39" column="23" selection-start-line="39" selection-start-column="23" selection-end-line="39" selection-end-column="23" />
                   <folding />
                 </state>
               </provider>
@@ -126,11 +122,11 @@
         <option value="$PROJECT_DIR$/src/main/java/com/baco/protorest/util/ProtoRestResolver.java" />
         <option value="$MAVEN_REPOSITORY$/io/protostuff/protostuff-runtime/1.5.3/protostuff-runtime-1.5.3-sources.jar!/io/protostuff/runtime/RuntimeEnv.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/baco/protorest/util/ProtoEnvelope.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/baco/protorest/exceptions/ProtoRestException.java" />
         <option value="$MAVEN_REPOSITORY$/io/protostuff/protostuff-core/1.5.3/protostuff-core-1.5.3-sources.jar!/io/protostuff/ProtostuffIOUtil.java" />
         <option value="$MAVEN_REPOSITORY$/io/protostuff/protostuff-api/1.5.3/protostuff-api-1.5.3-sources.jar!/io/protostuff/LinkedBuffer.java" />
         <option value="$MAVEN_REPOSITORY$/io/protostuff/protostuff-core/1.5.3/protostuff-core-1.5.3-sources.jar!/io/protostuff/IOUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/baco/protorest/util/ProtoRestDesSer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/baco/protorest/exceptions/ProtoRestException.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
@@ -705,16 +701,16 @@
       <workItem from="1488911520596" duration="7947000" />
       <workItem from="1489068361572" duration="1216000" />
       <workItem from="1489156363545" duration="3520000" />
-      <workItem from="1489500136263" duration="757000" />
+      <workItem from="1489500136263" duration="837000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49664000" />
+    <option name="totallyTimeSpent" value="49744000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -728,7 +724,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15833333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15833333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JSF" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1042,14 +1038,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="46" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/baco/protorest/util/ProtoRestDesSer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
@@ -1062,8 +1050,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/baco/protorest/exceptions/ProtoRestException.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="54" column="36" selection-start-line="54" selection-start-column="36" selection-end-line="54" selection-end-column="36" />
+        <state relative-caret-position="136">
+          <caret line="39" column="23" selection-start-line="39" selection-start-column="23" selection-end-line="39" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-323">
+          <caret line="5" column="27" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
           <folding />
         </state>
       </provider>
