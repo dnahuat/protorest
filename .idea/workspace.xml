@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bbd2c785-c840-4d2f-95fb-8345b05b280c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_12.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/baco/protorest/util/BufferPoolTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/baco/protorest/util/ProtoRestDesSerTest.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_3_8_1.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProtoRest.iml" afterPath="$PROJECT_DIR$/ProtoRest.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/baco/protorest/util/BufferPool.java" afterPath="$PROJECT_DIR$/src/main/java/com/baco/protorest/util/BufferPool.java" />
     </list>
     <ignored path="ProtoRest.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -72,7 +64,7 @@
             <entry file="file://$PROJECT_DIR$/pom.xml">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="85">
-                  <caret line="5" column="27" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="27" />
+                  <caret line="5" column="26" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
                   <folding />
                 </state>
               </provider>
@@ -167,13 +159,13 @@
         <option value="$MAVEN_REPOSITORY$/io/protostuff/protostuff-api/1.5.3/protostuff-api-1.5.3-sources.jar!/io/protostuff/LinkedBuffer.java" />
         <option value="$MAVEN_REPOSITORY$/io/protostuff/protostuff-core/1.5.3/protostuff-core-1.5.3-sources.jar!/io/protostuff/IOUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/baco/protorest/exceptions/ProtoRestException.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/baco/protorest/util/BufferPool.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/baco/protorest/util/BufferPoolTest.java" />
         <option value="$MAVEN_REPOSITORY$/io/protostuff/protostuff-core/1.5.3/protostuff-core-1.5.3-sources.jar!/io/protostuff/CodedInput.java" />
         <option value="$MAVEN_REPOSITORY$/io/protostuff/protostuff-api/1.5.3/protostuff-api-1.5.3-sources.jar!/io/protostuff/Input.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/baco/protorest/util/ProtoRestDesSer.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/baco/protorest/util/ProtoRestDesSerTest.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -939,7 +931,7 @@
       <workItem from="1489068361572" duration="1216000" />
       <workItem from="1489156363545" duration="3520000" />
       <workItem from="1489500136263" duration="3310000" />
-      <workItem from="1489676603341" duration="7324000" />
+      <workItem from="1489676603341" duration="7435000" />
     </task>
     <servers />
   </component>
@@ -976,7 +968,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59541000" />
+    <option name="totallyTimeSpent" value="59652000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1349,7 +1341,7 @@
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
-          <caret line="5" column="27" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="27" />
+          <caret line="5" column="26" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
           <folding />
         </state>
       </provider>
