@@ -11,23 +11,41 @@ import java.io.*;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
- * Metodos para serializacion y deseralizacion
+ * Helper methods for serialization and deserialization
  */
 public class ProtoRestDesSer {
 
     private static Schema schema;
+    private static AtomicBoolean configured = new AtomicBoolean(false);
+    private static final String LOGGER_NAME = "com.baco.protorest";
 
     private static final void configureRuntime() {
-        DefaultIdStrategy dis = (DefaultIdStrategy) RuntimeEnv.ID_STRATEGY;
-        dis.registerDelegate(TIMESTAMP_DELEGATE);
-        dis.registerDelegate(DATE_DELEGATE);
-        dis.registerDelegate(TIME_DELEGATE);
-        schema = RuntimeSchema.getSchema(ProtoEnvelope.class);
+        if(!configured.get()) {
+            Logger.getLogger(LOGGER_NAME).log(Level.FINE,"PROTOREST: Applying initial serializer/deserializer configuration");
+            DefaultIdStrategy dis = (DefaultIdStrategy) RuntimeEnv.ID_STRATEGY;
+            Logger.getLogger(LOGGER_NAME).log(Level.FINER,"PROTOREST: Registering date and time delegates");
+            dis.registerDelegate(TIMESTAMP_DELEGATE);
+            dis.registerDelegate(DATE_DELEGATE);
+            dis.registerDelegate(TIME_DELEGATE);
+            Logger.getLogger(LOGGER_NAME).log(Level.FINER,"PROTOREST: Registering schema for data transport envelope");
+            schema = RuntimeSchema.getSchema(ProtoEnvelope.class);
+            configured.set(true);
+        }
     }
 
-
+    /**
+     * Writes protorest data
+     * @param obj
+     * @param klass
+     * @param os
+     * @throws IOException
+     * @throws WebApplicationException
+     */
     public static final void writeProtorest(Object obj, Class klass, OutputStream os) throws IOException, WebApplicationException {
         configureRuntime();
         ProtoEnvelope o = new ProtoEnvelope(obj);
@@ -35,7 +53,8 @@ public class ProtoRestDesSer {
         try {
             buffer = BufferPool.takeBuffer();
             buffer.clear();
-            ProtostuffIOUtil.writeDelimitedTo(os, o, schema, buffer);
+            int size = ProtostuffIOUtil.writeDelimitedTo(os, o, schema, buffer);
+            Logger.getLogger(LOGGER_NAME).log(Level.FINER,"PROTOREST: " + size + "B writen. Wraped class in envelope is '" + klass.getName() + "'");
         } catch (InterruptedException ex) {
             throw new InternalServerErrorException("PROTOREST: Cannot obtain a buffer to write object.");
         } finally {
@@ -49,54 +68,24 @@ public class ProtoRestDesSer {
         }
     }
 
+    /**
+     * Reads protorest data
+     * @param klass
+     * @param is
+     * @return
+     * @throws IOException
+     * @throws WebApplicationException
+     */
     public static final Object readProtorest(Class klass, InputStream is) throws IOException, WebApplicationException {
         configureRuntime();
         /**
          * Obtain decompressed input stream
          */
         ProtoEnvelope result = (ProtoEnvelope) schema.newMessage();
-        ProtostuffIOUtil.mergeDelimitedFrom(is, result, schema);
-        return result.getPayload();
-    }
-
-    private static final Object getFromProtorest(byte[] protorest, Class klass) throws IOException {
-        /**
-         * Prepare schemas
-         */
-        configureRuntime();
-        ByteArrayInputStream is = new ByteArrayInputStream(protorest);
-        ProtoEnvelope result = (ProtoEnvelope)schema.newMessage();
-        ProtostuffIOUtil.mergeDelimitedFrom(is, result, schema);
-        is.close();
-        return result.getPayload();
-    }
-
-    private static final byte[] getProtorest(Object obj, Class klass) throws IOException {
-        ProtoEnvelope o = new ProtoEnvelope(obj);
-
-        LinkedBuffer buffer = null;
-
-        byte[] protorest;
-
-        try {
-            buffer = BufferPool.takeBuffer();
-            buffer.clear();
-            ByteArrayOutputStream os = new ByteArrayOutputStream();
-            ProtostuffIOUtil.writeDelimitedTo(os, o, schema, buffer);
-            os.close();
-            protorest = os.toByteArray();
-            return protorest;
-        } catch (InterruptedException ex) {
-            throw new IOException("PROTOREST: Cannot obtain a buffer to write object.");
-        } finally {
-            if(buffer != null) {
-                try {
-                    BufferPool.returnBuffer(buffer);
-                } catch(InterruptedException ex ) {
-                    throw new IOException("PROTOREST: Cannot return a buffer to write object.");
-                }
-            }
-        }
+        int size = ProtostuffIOUtil.mergeDelimitedFrom(is, result, schema);
+        Object unwrappedResult = result.getPayload();
+        Logger.getLogger(LOGGER_NAME).log(Level.FINER,"PROTOREST: " + size + "B have been read. Unwrapped class in envelope found is '" + unwrappedResult.getClass() + "'");
+        return unwrappedResult;
     }
 
     /**

@@ -59,6 +59,7 @@ public class BufferPool {
             instance = new BufferPool();
         }
         LinkedBuffer buffer = instance.bufferDeque.poll(1, TimeUnit.MINUTES);
+        buffer.clear();
         return buffer;
     }
 
@@ -66,6 +67,7 @@ public class BufferPool {
         if(instance == null) {
             instance = new BufferPool();
         }
+        buffer.clear();
         instance.bufferDeque.offer(buffer, 1, TimeUnit.MINUTES);
     }
 
