@@ -53,14 +53,32 @@ public class BufferPool {
                     LinkedBuffer.DEFAULT_BUFFER_SIZE));
         }
     }
-    
+
+    public static final void resetPool() {
+        if(instance != null) {
+            instance.bufferDeque.clear();
+            instance = new BufferPool();
+        }
+    }
+
+    public static final int availableBuffers() {
+        if(instance == null) {
+            instance = new BufferPool();
+        }
+        return instance.bufferDeque.size();
+    }
+
     public static final LinkedBuffer takeBuffer() throws InterruptedException {
         if(instance == null) {
             instance = new BufferPool();
         }
         LinkedBuffer buffer = instance.bufferDeque.poll(1, TimeUnit.MINUTES);
-        buffer.clear();
-        return buffer;
+        if(buffer != null) {
+            buffer.clear();
+            return buffer;
+        } else {
+            throw new InterruptedException("Cannot obtain a buffer after waiting 1 minute.");
+        }
     }
 
     public static final void returnBuffer(LinkedBuffer buffer) throws InterruptedException {
@@ -68,7 +86,9 @@ public class BufferPool {
             instance = new BufferPool();
         }
         buffer.clear();
-        instance.bufferDeque.offer(buffer, 1, TimeUnit.MINUTES);
+        if(!instance.bufferDeque.offer(buffer, 1, TimeUnit.MINUTES)) {
+            throw new InterruptedException("Cannot return a buffer to pool after waiting 1 minute.");
+        }
     }
 
 }
