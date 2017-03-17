@@ -26,13 +26,13 @@ public class ProtoRestDesSer {
 
     private static final void configureRuntime() {
         if(!configured.get()) {
-            Logger.getLogger(LOGGER_NAME).log(Level.FINE,"PROTOREST: Applying initial serializer/deserializer configuration");
+            Logger.getLogger(LOGGER_NAME).log(Level.FINE,"SER/DES: Applying initial serializer/deserializer configuration");
             DefaultIdStrategy dis = (DefaultIdStrategy) RuntimeEnv.ID_STRATEGY;
-            Logger.getLogger(LOGGER_NAME).log(Level.FINE,"PROTOREST: Registering date and time delegates");
+            Logger.getLogger(LOGGER_NAME).log(Level.FINE,"SER/DES: Registering date and time delegates");
             dis.registerDelegate(TIMESTAMP_DELEGATE);
             dis.registerDelegate(DATE_DELEGATE);
             dis.registerDelegate(TIME_DELEGATE);
-            Logger.getLogger(LOGGER_NAME).log(Level.FINE,"PROTOREST: Registering schema for data transport envelope");
+            Logger.getLogger(LOGGER_NAME).log(Level.FINE,"SER/DES: Registering schema for data transport envelope");
             schema = RuntimeSchema.getSchema(ProtoEnvelope.class);
             configured.set(true);
         }
@@ -54,15 +54,15 @@ public class ProtoRestDesSer {
             buffer = BufferPool.takeBuffer();
             buffer.clear();
             int size = ProtostuffIOUtil.writeDelimitedTo(os, o, schema, buffer);
-            Logger.getLogger(LOGGER_NAME).log(Level.FINE,"PROTOREST: " + size + "B writen. Wraped class in envelope is '" + klass.getName() + "'");
+            Logger.getLogger(LOGGER_NAME).log(Level.FINE,"SER/DES: " + size + "B writen. Wraped class in envelope is '" + klass.getName() + "'");
         } catch (InterruptedException ex) {
-            throw new InternalServerErrorException("PROTOREST: Cannot obtain a buffer to write object.", ex);
+            throw new InternalServerErrorException("SER/DES: Cannot obtain a buffer to write object.", ex);
         } finally {
             if(buffer != null) {
                 try {
                     BufferPool.returnBuffer(buffer);
                 } catch (InterruptedException ex) {
-                    throw new InternalServerErrorException("PROTOREST: Cannot return a buffer to write object.", ex);
+                    throw new InternalServerErrorException("SER/DES: Cannot return a buffer to write object.", ex);
                 }
             }
         }
@@ -84,7 +84,7 @@ public class ProtoRestDesSer {
         ProtoEnvelope result = (ProtoEnvelope) schema.newMessage();
         int size = ProtostuffIOUtil.mergeDelimitedFrom(is, result, schema);
         Object unwrappedResult = result.getPayload();
-        Logger.getLogger(LOGGER_NAME).log(Level.FINER,"PROTOREST: " + size + "B have been read. Unwrapped class in envelope found is '" + unwrappedResult.getClass() + "'");
+        Logger.getLogger(LOGGER_NAME).log(Level.FINER,"SER/DES: " + size + "B have been read. Unwrapped class in envelope found is '" + unwrappedResult.getClass() + "'");
         return unwrappedResult;
     }
 
