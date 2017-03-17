@@ -33,6 +33,8 @@ package com.baco.protorest.util;
 import io.protostuff.LinkedBuffer;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Pool of LinkedBuffers implemented through a Deque
@@ -43,7 +45,8 @@ public class BufferPool {
 
     public static final int MAX_CURRENT_BUFFERS = 100;
     private static BufferPool instance;
-    private final LinkedBlockingDeque<LinkedBuffer> bufferDeque; 
+    private final LinkedBlockingDeque<LinkedBuffer> bufferDeque;
+    private static final String LOGGER_NAME = "com.baco.protorest";
 
     private BufferPool() {
         bufferDeque = new LinkedBlockingDeque<LinkedBuffer>(
@@ -52,12 +55,14 @@ public class BufferPool {
             bufferDeque.push(LinkedBuffer.allocate(
                     LinkedBuffer.DEFAULT_BUFFER_SIZE));
         }
+        Logger.getLogger(LOGGER_NAME).log(Level.FINE,"BUFFERPOOL: The pool has been created.");
     }
 
     public static final void resetPool() {
         if(instance != null) {
             instance.bufferDeque.clear();
             instance = new BufferPool();
+            Logger.getLogger(LOGGER_NAME).log(Level.FINE,"BUFFERPOOL: The pool has been reset.");
         }
     }
 
@@ -72,12 +77,18 @@ public class BufferPool {
         if(instance == null) {
             instance = new BufferPool();
         }
-        LinkedBuffer buffer = instance.bufferDeque.poll(1, TimeUnit.MINUTES);
-        if(buffer != null) {
-            buffer.clear();
-            return buffer;
-        } else {
-            throw new InterruptedException("Cannot obtain a buffer after waiting 1 minute.");
+        try {
+            LinkedBuffer buffer = instance.bufferDeque.poll(1, TimeUnit.MINUTES);
+            if (buffer != null) {
+                buffer.clear();
+                return buffer;
+            } else {
+                throw new InterruptedException("Cannot obtain a buffer after waiting 1 minute.");
+            }
+        } finally {
+            if(instance != null) {
+                Logger.getLogger(LOGGER_NAME).log(Level.FINE, "BUFFERPOOL: Buffer taken. The pool has " + instance.bufferDeque.size() + "' buffer's availables now.");
+            }
         }
     }
 
@@ -85,9 +96,15 @@ public class BufferPool {
         if(instance == null) {
             instance = new BufferPool();
         }
-        buffer.clear();
-        if(!instance.bufferDeque.offer(buffer, 1, TimeUnit.MINUTES)) {
-            throw new InterruptedException("Cannot return a buffer to pool after waiting 1 minute.");
+        try {
+            buffer.clear();
+            if (!instance.bufferDeque.offer(buffer, 1, TimeUnit.MINUTES)) {
+                throw new InterruptedException("Cannot return a buffer to pool after waiting 1 minute.");
+            }
+        } finally {
+            if(instance != null) {
+                Logger.getLogger(LOGGER_NAME).log(Level.FINE, "BUFFERPOOL: Buffer taken. The pool has " + instance.bufferDeque.size() + "' buffer's availables now.");
+            }
         }
     }
 
