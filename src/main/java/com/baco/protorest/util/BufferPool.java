@@ -112,7 +112,7 @@ public class BufferPool {
             }
         } finally {
             if(instance != null) {
-                Logger.getLogger(LOGGER_NAME).log(Level.FINE, "BUFFER: Buffer taken. The pool has " + instance.bufferDeque.size() + "' buffer's availables now.");
+                Logger.getLogger(LOGGER_NAME).log(Level.FINE, "BUFFER: Buffer returned. The pool has " + instance.bufferDeque.size() + "' buffer's availables now.");
             }
         }
     }

@@ -84,7 +84,7 @@ public class ProtoRestDesSer {
         ProtoEnvelope result = (ProtoEnvelope) schema.newMessage();
         int size = ProtostuffIOUtil.mergeDelimitedFrom(is, result, schema);
         Object unwrappedResult = result.getPayload();
-        Logger.getLogger(LOGGER_NAME).log(Level.FINER,"SER/DES: " + size + "B have been read. Unwrapped class in envelope found is '" + unwrappedResult.getClass() + "'");
+        Logger.getLogger(LOGGER_NAME).log(Level.FINE,"SER/DES: " + size + "B have been read. Unwrapped class in envelope found is '" + unwrappedResult.getClass() + "'");
         return unwrappedResult;
     }
 

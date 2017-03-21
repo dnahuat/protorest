@@ -11,3 +11,5 @@ syntax:glob
 /QAServices/target/
 /QAEAR/target/
 /target/
+.idea
+.idea/*
